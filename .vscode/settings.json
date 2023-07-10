@@ -1,0 +1,22 @@
+{
+  "eslint.validate": [
+    "vue",
+    "html",
+    "javascript"
+  ],
+  "editor.formatOnSave": true,
+  "vetur.validation.template": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "chartjs",
+    "fontawesome",
+    "fortawesome",
+    "nightwatch",
+    "rushstack",
+    "tailwindcss",
+    "Vetur",
+    "vuex"
+  ]
+}
