@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Tree from '../views/Tree.vue'
+import TreeView from '../views/TreeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'tree',
-      component: Tree
+      component: TreeView
     },
     {
       path: '/about',
