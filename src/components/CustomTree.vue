@@ -1,7 +1,6 @@
 <template>
   <el-tree-v2
     :data="data"
-    :props="props"
     :height="400"
     class="mt-4 border-2 border-slate-300"
     @node-click="clickHandler"
@@ -19,10 +18,6 @@ import { defineProps, defineEmits } from 'vue'
 const props = defineProps({
   data: {
     type: Array,
-    required: true
-  },
-  props: {
-    type: Object,
     required: true
   }
 })

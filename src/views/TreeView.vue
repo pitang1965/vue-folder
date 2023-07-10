@@ -7,7 +7,7 @@
       <h2 class="ml-2">id: {{ currentId ? currentId : '未選択' }}</h2>
     </div>
 
-    <CustomTree :data="data" :props="props" @selected="selectedHandler" />
+    <CustomTree :data="data" @selected="selectedHandler" />
   </div>
 </template>
 
@@ -22,10 +22,10 @@ const currentId = ref('')
 const currentLabel = ref('')
 const isFolder = ref(false)
 
-const selectedHandler = ({ id, label, isFolder }) => {
+const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
   currentId.value = id
   currentLabel.value = label
-  isFolder.value = isFolder
+  isFolder.value = isFolderValue
 }
 
 </script>
