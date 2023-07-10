@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
 const props = defineProps({
   data: {
@@ -26,6 +26,13 @@ const props = defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['selected'])
+
+const clickHandler = (data: TreeNodeData, node: TreeNode) => {
+  const isFolder = !node.isLeaf
+  emit('selected', { id: data.id, label: data.label, isFolder })
+}
 </script>
 
 <style></style>

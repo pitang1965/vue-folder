@@ -7,7 +7,7 @@
       <h2 class="ml-2">id: {{ currentId ? currentId : '未選択' }}</h2>
     </div>
 
-    <CustomTree :data="data" :props="props" @node-click="clickHandler" />
+    <CustomTree :data="data" :props="props" @selected="selectedHandler" />
   </div>
 </template>
 
@@ -22,14 +22,12 @@ const currentId = ref('')
 const currentLabel = ref('')
 const isFolder = ref(false)
 
-const clickHandler = (data: TreeNodeData, node: TreeNode) => {
-  console.log(data)
-  console.log(node)
-
-  currentId.value = data.id
-  currentLabel.value = data.label
-  isFolder.value = !node.isLeaf
+const selectedHandler = ({ id, label, isFolder }) => {
+  currentId.value = id
+  currentLabel.value = label
+  isFolder.value = isFolder
 }
+
 </script>
 
 <style></style>
