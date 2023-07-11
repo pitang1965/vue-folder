@@ -5,9 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFolder } from '@fortawesome/free-solid-svg-icons'
 
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
 import './style.css'
 
 const app = createApp(App)
@@ -15,6 +13,5 @@ const app = createApp(App)
 library.add(faFolder)
 
 app.use(router)
-app.use(ElementPlus)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app')

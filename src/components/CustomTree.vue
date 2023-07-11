@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ElTreeV2 } from 'element-plus'
 const props = defineProps({
   data: {
     type: Array,
