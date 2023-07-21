@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue'
 import CustomTree from '@/components/CustomTree.vue'
 import FolderNameDialog from '@/components/FolderNameDialog.vue'

@@ -12,7 +12,7 @@
   </el-tree-v2>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts" >
 import { ElTreeV2 } from 'element-plus'
 const props = defineProps({
   data: {
