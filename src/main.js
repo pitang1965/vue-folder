@@ -8,10 +8,13 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import 'element-plus/dist/index.css'
 import './style.css'
 
+import naive from "naive-ui";
+
 const app = createApp(App)
 
 library.add(faFolder)
 
 app.use(router)
+app.use(naive);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app')

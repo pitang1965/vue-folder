@@ -63,11 +63,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, h, reactive, ref } from 'vue'
 import CustomTree from '@/components/CustomTree.vue'
 import FolderNameDialog from '@/components/FolderNameDialog.vue'
-import createData from '@/data/createData'
-import { v4 as uuidv4 } from 'uuid'
+import { createData, createFolderData} from '@/data/createData'
 
 const folderNameDialogVisible = ref(false)
 const currentId = ref('')
@@ -75,6 +74,7 @@ const currentLabel = ref('')
 const isFolder = ref(false)
 
 const data = reactive(createData())
+console.log (data)
 
 const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
   currentId.value = id
@@ -90,12 +90,7 @@ const handleFolderAdded = folderName => {
   )
   if (currentId.value) {
   } else {
-    data.push({
-      id: uuidv4(),
-      label: folderName,
-      children: []
-    })
-    console.log(data) // データは更新されるが、CustomTreeは更新されない。
+    data.push(createFolderData(folderName))
   }
 }
 

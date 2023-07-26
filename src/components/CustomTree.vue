@@ -1,21 +1,15 @@
 <template>
-  <el-tree-v2
-    :data="props.data"
-    :height="400"
-    class="mt-4 border-2 border-slate-300"
-    @node-click="clickHandler"
-  >
-    <template #default="{ node }">
-      <font-awesome-icon v-if="!node.isLeaf" icon="fa-folder" class="pr-2" />
-      <span>{{ node.label }}</span>
-    </template>
-  </el-tree-v2>
-  <div>{{props.data}}</div>
+  <n-tree
+    block-line
+    :data="data"
+    :default-expanded-keys="defaultExpandedKeys"
+    :selectable="false"
+  />
 </template>
 
 <script setup lang="ts" >
-import { onUpdated, reactive } from 'vue'
-import { ElTreeV2 } from 'element-plus'
+import { onUpdated, ref } from 'vue'
+
 const props = defineProps({
   data: {
     type: Array,
@@ -33,6 +27,9 @@ const clickHandler = (data: TreeNodeData, node: TreeNode) => {
 onUpdated(() => {
   console.log('props.dataが変更！')
 })
+
+const defaultExpandedKeys = ref(['40', '41'])
+
 </script>
 
 <style></style>

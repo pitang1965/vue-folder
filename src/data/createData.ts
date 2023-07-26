@@ -1,54 +1,50 @@
+import { h } from 'vue'
+import { repeat } from 'seemly'
+import { NButton, TreeOption } from 'naive-ui'
 import { v4 as uuidv4 } from 'uuid'
 
-interface Tree {
-  id: string
-  label: string
-  children?: Tree[]
+const createLabel = (level: number): string  => {
+  if (level === 4) return 'Level 4'
+  if (level === 3) return 'Level 3'
+  if (level === 2) return 'Level 2'
+  if (level === 1) return 'Level 1'
+  return ''
 }
 
-const createData = (): Tree[] => [
-  {
-    id: uuidv4(),
-    label: '未分類',
-    children: [
-      {
-        id: uuidv4(),
-        label: '文書1'
-      },
-      {
-        id: uuidv4(),
-        label: '文書2'
-      }
-    ]
-  },
-  {
-    id: uuidv4(),
-    label: 'フォルダ1',
-    children: [
-      {
-        id: uuidv4(),
-        label: '文書3'
-      },
-      {
-        id: uuidv4(),
-        label: '文書4'
-      },
-      {
-        id: uuidv4(),
-        label: '文書5'
-      }
-    ]
-  },
-  {
-    id: uuidv4(),
-    label: 'フォルダ2',
-    children: [
-      {
-        id: uuidv4(),
-        label: '文書6'
-      }
-    ]
-  }
-]
 
-export default createData;
+export const createData = (level = 3, baseKey = ''): TreeOption[] | undefined => {
+  if (!level) return undefined
+  return repeat(6 - level, undefined).map((_, index) => {
+    const key = '' + baseKey + level + index
+    const label = createLabel(level)
+    return {
+      label,
+      key,
+      children: createData(level - 1, key),
+      suffix: () =>
+        h(
+          NButton,
+          { text: true, type: 'primary' },
+          { default: () => 'なんか説明' }
+        ),
+      prefix: () =>
+        h(NButton, { text: true, type: 'primary' }, { default: () => '後でアイコン付ける' })
+    }
+  })
+}
+
+export const createFolderData =(name: string) => {
+  return {
+    label: name,
+    key: uuidv4(),
+    children: [],
+    suffix: () =>
+      h(
+        NButton,
+        { text: true, type: 'primary' },
+        { default: () => 'なんか説明' }
+      ),
+    prefix: () =>
+      h(NButton, { text: true, type: 'primary' }, { default: () => 'フォルダ' })
+  }
+}

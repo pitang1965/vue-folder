@@ -1,5 +1,5 @@
 # vue-folder
-[Element Plus](https://element-plus.org/en-US/)を用いたフォルダ表示の実験。
+[Naive UI](https://www.naiveui.com/en-US/os-theme)のTreeを用いたフォルダ表示の実験。[Element Plus](https://element-plus.org/en-US/)もダイアログ等に用いている。
 
 ## Recommended IDE Setup
 
