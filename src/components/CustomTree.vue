@@ -1,6 +1,6 @@
 <template>
   <el-tree-v2
-    :data="data"
+    :data="props.data"
     :height="400"
     class="mt-4 border-2 border-slate-300"
     @node-click="clickHandler"
@@ -10,9 +10,11 @@
       <span>{{ node.label }}</span>
     </template>
   </el-tree-v2>
+  <div>{{props.data}}</div>
 </template>
 
 <script setup lang="ts" >
+import { onUpdated, reactive } from 'vue'
 import { ElTreeV2 } from 'element-plus'
 const props = defineProps({
   data: {
@@ -27,6 +29,10 @@ const clickHandler = (data: TreeNodeData, node: TreeNode) => {
   const isFolder = !node.isLeaf
   emit('selected', { id: data.id, label: data.label, isFolder })
 }
+
+onUpdated(() => {
+  console.log('props.dataが変更！')
+})
 </script>
 
 <style></style>
