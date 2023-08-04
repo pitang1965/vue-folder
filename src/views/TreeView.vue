@@ -66,7 +66,7 @@
 import { computed, h, reactive, ref } from 'vue'
 import CustomTree from '@/components/CustomTree.vue'
 import FolderNameDialog from '@/components/FolderNameDialog.vue'
-import { createData, createFolderData} from '@/data/createData'
+import { addFolderDataById, createData } from '@/data/createData'
 
 const folderNameDialogVisible = ref(false)
 const currentId = ref('')
@@ -74,7 +74,7 @@ const currentLabel = ref('')
 const isFolder = ref(false)
 
 const data = reactive(createData())
-console.log (data)
+console.log(data)
 
 const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
   currentId.value = id
@@ -83,15 +83,7 @@ const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
 }
 
 const handleFolderAdded = folderName => {
-  alert(
-    `${folderName}が入力されたよ。現在のフォルダ名は${
-      currentLabel.value ? currentLabel.value : '未指定'
-    }`
-  )
-  if (currentId.value) {
-  } else {
-    data.push(createFolderData(folderName))
-  }
+  addFolderDataById(data, currentId.value, folderName)
 }
 
 const addDocument = () => {

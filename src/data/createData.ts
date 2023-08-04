@@ -12,6 +12,7 @@ const createLabel = (level: number): string  => {
 }
 
 
+// ダミーの初期データを作成
 export const createData = (level = 3, baseKey = ''): TreeOption[] | undefined => {
   if (!level) return undefined
   return repeat(6 - level, undefined).map((_, index) => {
@@ -31,18 +32,40 @@ export const createData = (level = 3, baseKey = ''): TreeOption[] | undefined =>
   })
 }
 
-export const createFolderData =(name: string) => {
-  return {
-    label: name,
-    key: uuidv4(),
-    children: [],
-    suffix: () =>
-      h(
-        NButton,
-        { text: true, type: 'primary' },
-        { default: () => 'なんか説明' }
-      ),
-    prefix: () =>
-      h(NButton, { text: true, type: 'primary' }, { default: () => 'フォルダ' })
+// idで指定したフォルダ以下に新規フォルダを追加
+export const addFolderDataById = (tree: TreeOption[], id: string, name: string): void => {
+  const createFolderData =(name: string) => {
+    return {
+      label: name,
+      key: uuidv4(),
+      children: [],
+      suffix: () =>
+        h(
+          NButton,
+          { text: true, type: 'primary' },
+          { default: () => 'なんか説明' }
+        ),
+    }
   }
-}
+
+  if (!id) {
+    console.log('undefined')
+    const newData = createFolderData(name);
+    tree.push(newData);
+    return;
+  }
+
+  tree.forEach((node) => {
+    console.log('id: ', id);
+    if (node.key === id) {
+      const newData = createFolderData(name);
+
+      if (!node.children) node.children = [];
+      node.children.push(newData);
+      return;
+    }
+    if (node.children) {
+      addFolderDataById(node.children, id, name);
+    }
+  });
+};
