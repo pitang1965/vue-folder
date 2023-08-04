@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { h, onUpdated, ref } from 'vue';
-import { NIcon } from 'naive-ui';
+import { NIcon, TreeOption } from 'naive-ui';
 import { FolderOpenOutline, FolderOutline } from '@vicons/ionicons5';
 
 const props = defineProps({
@@ -45,6 +45,7 @@ const renderSwitcherIconWithExpaned = ({ expanded }: { expanded: boolean }) =>
   h(NIcon, null, {
     default: () => h(expanded ? FolderOpenOutline : FolderOutline)
   });
+
 </script>
 
 <style></style>

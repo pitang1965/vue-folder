@@ -13,8 +13,8 @@ const createLabel = (level: number): string  => {
 
 
 // ダミーの初期データを作成
-export const createData = (level = 3, baseKey = ''): TreeOption[] | undefined => {
-  if (!level) return undefined
+export const createData = (level = 3, baseKey = ''): TreeOption[] => {
+  if (!level) return [];
   return repeat(6 - level, undefined).map((_, index) => {
     const key = '' + baseKey + level + index
     const label = createLabel(level)

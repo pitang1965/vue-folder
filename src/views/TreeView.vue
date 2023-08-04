@@ -64,16 +64,18 @@
 
 <script setup lang="ts">
 import { computed, h, reactive, ref } from 'vue';
-import CustomTree from '@/components/CustomTree.vue';
-import FolderNameDialog from '@/components/FolderNameDialog.vue';
-import { addFolderDataById, createData } from '@/data/createData';
+import CustomTree from '../components/CustomTree.vue';
+import FolderNameDialog from '../components/FolderNameDialog.vue';
+import { addFolderDataById, createData } from '../data/createData';
+import { TreeOption } from 'naive-ui';
+
 
 const folderNameDialogVisible = ref(false);
 const currentId = ref('');
 const currentLabel = ref('');
 const isFolder = ref(false);
 
-const data = reactive(createData());
+const data: TreeOption[] = reactive(createData());
 console.log(data);
 
 const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
