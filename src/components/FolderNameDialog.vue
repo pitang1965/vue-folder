@@ -11,39 +11,37 @@
   </el-dialog>
 </template>
 
-
 <script setup>
-import { computed, ref } from 'vue'
-import { ElButton, ElDialog, ElInput, ElMessageBox } from 'element-plus'
+import { computed, ref } from 'vue';
+import { ElButton, ElDialog, ElInput, ElMessageBox } from 'element-plus';
 
-const props = defineProps(['modelValue'])
-const emit = defineEmits(['update:modelValue', 'folderAdded'])
+const props = defineProps(['modelValue']);
+const emit = defineEmits(['update:modelValue', 'folderAdded']);
 
 const visible = computed({
   get() {
-    return props.modelValue
+    return props.modelValue;
   },
   set(visible) {
-    emit('update:modelValue', visible)
+    emit('update:modelValue', visible);
   }
-})
+});
 
-const folderName = ref('')
+const folderName = ref('');
 
 const closeDialog = () => {
-  visible.value = false
-}
+  visible.value = false;
+};
 
 const confirmDialog = () => {
   if (folderName.value === '') {
-    alert('何も入力されていません。')
-    return
+    alert('何も入力されていません。');
+    return;
   }
-  emit('folderAdded', folderName.value)
-  closeDialog()
-}
+  emit('folderAdded', folderName.value);
+  closeDialog();
+};
 </script>
-
 
 <style scoped>
 .el-button {

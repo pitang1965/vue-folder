@@ -63,61 +63,61 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, reactive, ref } from 'vue'
-import CustomTree from '@/components/CustomTree.vue'
-import FolderNameDialog from '@/components/FolderNameDialog.vue'
-import { addFolderDataById, createData } from '@/data/createData'
+import { computed, h, reactive, ref } from 'vue';
+import CustomTree from '@/components/CustomTree.vue';
+import FolderNameDialog from '@/components/FolderNameDialog.vue';
+import { addFolderDataById, createData } from '@/data/createData';
 
-const folderNameDialogVisible = ref(false)
-const currentId = ref('')
-const currentLabel = ref('')
-const isFolder = ref(false)
+const folderNameDialogVisible = ref(false);
+const currentId = ref('');
+const currentLabel = ref('');
+const isFolder = ref(false);
 
-const data = reactive(createData())
-console.log(data)
+const data = reactive(createData());
+console.log(data);
 
 const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
-  currentId.value = id
-  currentLabel.value = label
-  isFolder.value = isFolderValue
-}
+  currentId.value = id;
+  currentLabel.value = label;
+  isFolder.value = isFolderValue;
+};
 
 const handleFolderAdded = folderName => {
-  addFolderDataById(data, currentId.value, folderName)
-}
+  addFolderDataById(data, currentId.value, folderName);
+};
 
 const addDocument = () => {
-  alert('文書追加')
-}
+  alert('文書追加');
+};
 
 const deleteItem = () => {
-  alert('削除')
-}
+  alert('削除');
+};
 
 const renameItem = () => {
-  alert('改名')
-}
+  alert('改名');
+};
 
 // [フォルダを追加]が使用不可
 const addFolderDisabled = computed(() => {
-  if (isFolder.value) return false
-  return !!currentId.value
-})
+  if (isFolder.value) return false;
+  return !!currentId.value;
+});
 
 // [文書を追加]が使用不可
-const addDocumentDisabled = computed(() => !isFolder.value)
+const addDocumentDisabled = computed(() => !isFolder.value);
 
 // [削除]が使用不可
 const deleteDisabled = computed(() => {
-  if (isFolder.value && currentLabel.value === '未分類') return true
-  return !!!currentId.value
-})
+  if (isFolder.value && currentLabel.value === '未分類') return true;
+  return !!!currentId.value;
+});
 
 // [改名]が使用不可
 const renameDisabled = computed(() => {
-  if (isFolder.value && currentLabel.value === '未分類') return true
-  return !!!currentId.value
-})
+  if (isFolder.value && currentLabel.value === '未分類') return true;
+  return !!!currentId.value;
+});
 </script>
 
 <style></style>

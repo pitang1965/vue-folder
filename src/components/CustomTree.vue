@@ -10,41 +10,41 @@
 </template>
 
 <script setup lang="ts">
-import { h, onUpdated, ref } from 'vue'
-import { NIcon } from 'naive-ui'
-import { FolderOpenOutline, FolderOutline } from '@vicons/ionicons5'
+import { h, onUpdated, ref } from 'vue';
+import { NIcon } from 'naive-ui';
+import { FolderOpenOutline, FolderOutline } from '@vicons/ionicons5';
 
 const props = defineProps({
   data: {
     type: Array,
     required: true
   }
-})
+});
 
-const emit = defineEmits(['selected'])
+const emit = defineEmits(['selected']);
 
 onUpdated(() => {
-  console.log('props.dataが変更！')
-})
+  console.log('props.dataが変更！');
+});
 
 // 最初に展開するノード
-const defaultExpandedKeys = ref(['30', '31'])
+const defaultExpandedKeys = ref(['30', '31']);
 
 const nodeProps = ({ option }: { option: TreeOption }) => {
   // クリックされたときの処理
   const onClick = () => {
-    const isFolder = typeof(option.children) !== 'undefined'
-    emit('selected', { id: option.key, label: option.label, isFolder })
-    console.log(option)
-  }
-  return { onClick }
-}
+    const isFolder = typeof option.children !== 'undefined';
+    emit('selected', { id: option.key, label: option.label, isFolder });
+    console.log(option);
+  };
+  return { onClick };
+};
 
 // アイコンは https://www.xicons.org/ のionicons5のもの
 const renderSwitcherIconWithExpaned = ({ expanded }: { expanded: boolean }) =>
-        h(NIcon, null, {
-          default: () => h(expanded ? FolderOpenOutline : FolderOutline)
-        })
+  h(NIcon, null, {
+    default: () => h(expanded ? FolderOpenOutline : FolderOutline)
+  });
 </script>
 
 <style></style>
