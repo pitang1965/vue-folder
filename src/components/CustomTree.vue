@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { h, onUpdated, ref } from 'vue';
+import { h, ref } from 'vue';
 import { NIcon, TreeOption } from 'naive-ui';
 import { FolderOpenOutline, FolderOutline } from '@vicons/ionicons5';
 
@@ -23,10 +23,6 @@ const props = defineProps({
 
 const emit = defineEmits(['selected']);
 
-onUpdated(() => {
-  console.log('props.dataが変更！');
-});
-
 // 最初に展開するノード
 const defaultExpandedKeys = ref(['30', '31']);
 
@@ -35,7 +31,6 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
   const onClick = () => {
     const isFolder = typeof option.children !== 'undefined';
     emit('selected', { id: option.key, label: option.label, isFolder });
-    console.log(option);
   };
   return { onClick };
 };

@@ -49,14 +49,12 @@ export const addFolderDataById = (tree: TreeOption[], id: string, name: string):
   }
 
   if (!id) {
-    console.log('undefined')
     const newData = createFolderData(name);
     tree.push(newData);
     return;
   }
 
   tree.forEach((node) => {
-    console.log('id: ', id);
     if (node.key === id) {
       const newData = createFolderData(name);
 

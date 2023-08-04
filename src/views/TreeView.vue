@@ -76,7 +76,6 @@ const currentLabel = ref('');
 const isFolder = ref(false);
 
 const data: TreeOption[] = reactive(createData());
-console.log(data);
 
 const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
   currentId.value = id;
