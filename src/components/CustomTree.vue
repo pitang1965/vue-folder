@@ -5,11 +5,14 @@
     :default-expanded-keys="defaultExpandedKeys"
     :selectable="false"
     :node-props="nodeProps"
+    :render-switcher-icon="renderSwitcherIconWithExpaned"
   />
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref } from 'vue'
+import { h, onUpdated, ref } from 'vue'
+import { NIcon } from 'naive-ui'
+import { FolderOpenOutline, FolderOutline } from '@vicons/ionicons5'
 
 const props = defineProps({
   data: {
@@ -24,7 +27,8 @@ onUpdated(() => {
   console.log('props.dataが変更！')
 })
 
-const defaultExpandedKeys = ref(['40', '41'])
+// 最初に展開するノード
+const defaultExpandedKeys = ref(['30', '31'])
 
 const nodeProps = ({ option }: { option: TreeOption }) => {
   // クリックされたときの処理
@@ -35,6 +39,12 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
   }
   return { onClick }
 }
+
+// アイコンは https://www.xicons.org/ のionicons5のもの
+const renderSwitcherIconWithExpaned = ({ expanded }: { expanded: boolean }) =>
+        h(NIcon, null, {
+          default: () => h(expanded ? FolderOpenOutline : FolderOutline)
+        })
 </script>
 
 <style></style>

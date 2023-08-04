@@ -27,8 +27,6 @@ export const createData = (level = 3, baseKey = ''): TreeOption[] | undefined =>
           { text: true, type: 'primary' },
           { default: () => 'なんか説明' }
         ),
-      prefix: () =>
-        h(NButton, { text: true, type: 'primary' }, { default: () => '後でアイコン付ける' })
     }
   })
 }
