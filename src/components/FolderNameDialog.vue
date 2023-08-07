@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="visible" title="フォルダの追加" width="30%">
     <span>フォルダ名を入力してください。</span>
-    <el-input v-model="folderName" placeholder="名" class="mt-2" />
+    <el-input v-model="folderName" placeholder="フォルダ名" class="mt-2" />
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="closeDialog">Cancel</el-button>
