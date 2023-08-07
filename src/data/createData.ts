@@ -22,12 +22,6 @@ export const createData = (level = 3, baseKey = ''): TreeOption[] => {
       label,
       key,
       children: level > 1 ? createData(level - 1, key) :  undefined,
-      suffix: () =>
-        h(
-          NButton,
-          { text: true, type: 'primary' },
-          { default: () => level > 1 ? 'なにかフォルダの説明' : 'なにか文書の説明' }
-        ),
     }
   })
 }
@@ -39,12 +33,6 @@ export const addFolderDataById = (tree: TreeOption[], id: string, name: string):
       label: name,
       key: uuidv4(),
       children: [],
-      suffix: () =>
-        h(
-          NButton,
-          { text: true, type: 'primary' },
-          { default: () => 'なにかフォルダの説明' }
-        ),
     }
   }
 
@@ -75,12 +63,6 @@ export const addDocumentDataById = (tree: TreeOption[], id: string, name: string
     return {
       label: name,
       key: uuidv4(),
-      suffix: () =>
-        h(
-          NButton,
-          { text: true, type: 'primary' },
-          { default: () => 'なにか文書の説明' }
-        ),
     }
   }
 
