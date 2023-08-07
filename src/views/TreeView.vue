@@ -126,14 +126,14 @@ const renameDisabled = computed(() => {
 });
 
 const loadFromLocalStorage = () => {
-      const item = localStorage.getItem('data');
-      if (item) {
-        const parseData = reactive(JSON.parse(item));
-        data.splice(0, data.length, ...parseData);
-      } else {
-        data = reactive(createData());
-      }
-    }
+  const item = localStorage.getItem('data');
+  if (item) {
+    const parseData = reactive(JSON.parse(item));
+    data.splice(0, data.length, ...parseData);
+  } else {
+    data.splice(0, data.length, ...createData());
+  }
+};
 
 const saveToLocalStorage = () => {
   const rawData = toRaw(data);
