@@ -22,7 +22,7 @@
       </button>
       <button
         :disabled="addDocumentDisabled"
-        @click="addDocument"
+        @click="documentNameDialogVisible = true"
         class="text-white px-2 my-2 rounded-full"
         :class="{
           'bg-purple-500': !addDocumentDisabled,
@@ -57,6 +57,7 @@
         改名
       </button>
       <FolderNameDialog v-model="folderNameDialogVisible" @folderAdded="handleFolderAdded" />
+      <DocumentNameDialog v-model="documentNameDialogVisible" @documentAdded="handleDocumentAdded" />
     </div>
     <CustomTree :data="data" @selected="selectedHandler" />
   </div>
@@ -66,11 +67,14 @@
 import { computed, h, reactive, ref } from 'vue';
 import CustomTree from '../components/CustomTree.vue';
 import FolderNameDialog from '../components/FolderNameDialog.vue';
-import { addFolderDataById, createData } from '../data/createData';
+import DocumentNameDialog from '../components/DocumentNameDialog.vue';
+import { addDocumentDataById, addFolderDataById, createData } from '../data/createData';
 import { TreeOption } from 'naive-ui';
+import { faArrowLeftRotate } from '@fortawesome/free-solid-svg-icons';
 
 
 const folderNameDialogVisible = ref(false);
+const documentNameDialogVisible = ref(false);
 const currentId = ref('');
 const currentLabel = ref('');
 const isFolder = ref(false);
@@ -87,9 +91,9 @@ const handleFolderAdded = folderName => {
   addFolderDataById(data, currentId.value, folderName);
 };
 
-const addDocument = () => {
-  alert('文書追加');
-};
+const handleDocumentAdded = documentName => {
+  addDocumentDataById(data, currentId.value, documentName);
+}
 
 const deleteItem = () => {
   alert('削除');

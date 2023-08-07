@@ -26,7 +26,7 @@ export const createData = (level = 3, baseKey = ''): TreeOption[] => {
         h(
           NButton,
           { text: true, type: 'primary' },
-          { default: () => 'なんか説明' }
+          { default: () => level > 1 ? 'なにかフォルダの説明' : 'なにか文書の説明' }
         ),
     }
   })
@@ -43,7 +43,7 @@ export const addFolderDataById = (tree: TreeOption[], id: string, name: string):
         h(
           NButton,
           { text: true, type: 'primary' },
-          { default: () => 'なんか説明' }
+          { default: () => 'なにかフォルダの説明' }
         ),
     }
   }
@@ -64,6 +64,42 @@ export const addFolderDataById = (tree: TreeOption[], id: string, name: string):
     }
     if (node.children) {
       addFolderDataById(node.children, id, name);
+    }
+  });
+};
+
+
+// idで指定したフォルダ以下に新規文書を追加
+export const addDocumentDataById = (tree: TreeOption[], id: string, name: string): void => {
+  const createDocumentData =(name: string) => {
+    return {
+      label: name,
+      key: uuidv4(),
+      suffix: () =>
+        h(
+          NButton,
+          { text: true, type: 'primary' },
+          { default: () => 'なにか文書の説明' }
+        ),
+    }
+  }
+
+  if (!id) {
+    const newData = createDocumentData(name);
+    tree.push(newData);
+    return;
+  }
+
+  tree.forEach((node) => {
+    if (node.key === id) {
+      const newData = createDocumentData(name);
+
+      if (!node.children) node.children = [];
+      node.children.push(newData);
+      return;
+    }
+    if (node.children) {
+      addDocumentDataById(node.children, id, name);
     }
   });
 };
