@@ -21,7 +21,7 @@ export const createData = (level = 3, baseKey = ''): TreeOption[] => {
     return {
       label,
       key,
-      children: createData(level - 1, key),
+      children: level > 1 ? createData(level - 1, key) :  undefined,
       suffix: () =>
         h(
           NButton,
