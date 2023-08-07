@@ -57,21 +57,22 @@
         改名
       </button>
       <FolderNameDialog v-model="folderNameDialogVisible" @folderAdded="handleFolderAdded" />
-      <DocumentNameDialog v-model="documentNameDialogVisible" @documentAdded="handleDocumentAdded" />
+      <DocumentNameDialog
+        v-model="documentNameDialogVisible"
+        @documentAdded="handleDocumentAdded"
+      />
     </div>
     <CustomTree :data="data" @selected="selectedHandler" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, h, reactive, ref } from 'vue';
+import { computed, h, onMounted, reactive, ref, toRaw, watch } from 'vue';
 import CustomTree from '../components/CustomTree.vue';
 import FolderNameDialog from '../components/FolderNameDialog.vue';
 import DocumentNameDialog from '../components/DocumentNameDialog.vue';
 import { addDocumentDataById, addFolderDataById, createData } from '../data/createData';
 import { TreeOption } from 'naive-ui';
-import { faArrowLeftRotate } from '@fortawesome/free-solid-svg-icons';
-
 
 const folderNameDialogVisible = ref(false);
 const documentNameDialogVisible = ref(false);
@@ -79,7 +80,7 @@ const currentId = ref('');
 const currentLabel = ref('');
 const isFolder = ref(false);
 
-const data: TreeOption[] = reactive(createData());
+let data: TreeOption[] = reactive([]);
 
 const selectedHandler = ({ id, label, isFolder: isFolderValue }) => {
   currentId.value = id;
@@ -93,7 +94,7 @@ const handleFolderAdded = folderName => {
 
 const handleDocumentAdded = documentName => {
   addDocumentDataById(data, currentId.value, documentName);
-}
+};
 
 const deleteItem = () => {
   alert('削除');
@@ -122,6 +123,29 @@ const deleteDisabled = computed(() => {
 const renameDisabled = computed(() => {
   if (isFolder.value && currentLabel.value === '未分類') return true;
   return !!!currentId.value;
+});
+
+const loadFromLocalStorage = () => {
+      const item = localStorage.getItem('data');
+      if (item) {
+        const parseData = reactive(JSON.parse(item));
+        data.splice(0, data.length, ...parseData);
+      } else {
+        data = reactive(createData());
+      }
+    }
+
+const saveToLocalStorage = () => {
+  const rawData = toRaw(data);
+  localStorage.setItem('data', JSON.stringify(rawData));
+};
+
+onMounted(() => {
+  loadFromLocalStorage();
+});
+
+watch(data, async data => {
+  saveToLocalStorage();
 });
 </script>
 
