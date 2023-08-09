@@ -85,3 +85,19 @@ export const addDocumentDataById = (tree: TreeOption[], id: string, name: string
     }
   });
 };
+
+
+export const removeDataById = (tree: TreeOption[], id: string): void => {
+  for (let i = 0; i < tree.length; i++) {
+    const node = tree[i];
+    if (node.key === id) {
+      // IDが一致する場合、このノードを削除
+      tree.splice(i, 1);
+      return;
+    }
+    if (node.children) {
+      // 子ノードがある場合、再帰的に探索
+      removeDataById(node.children, id);
+    }
+  }
+};

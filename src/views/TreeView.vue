@@ -56,8 +56,20 @@
       >
         改名
       </button>
-      <NameDialog v-model="folderNameDialogVisible" title="フォルダの追加" placeholder="フォルダ名" description="フォルダ名を入力してください。" @confirm="handleFolderAdded" />
-      <NameDialog v-model="documentNameDialogVisible" title="文書の追加" placeholder="文書名" description="文書名を入力してください。" @confirm="handleDocumentAdded" />
+      <NameDialog
+        v-model="folderNameDialogVisible"
+        title="フォルダの追加"
+        placeholder="フォルダ名"
+        description="フォルダ名を入力してください。"
+        @confirm="handleFolderAdded"
+      />
+      <NameDialog
+        v-model="documentNameDialogVisible"
+        title="文書の追加"
+        placeholder="文書名"
+        description="文書名を入力してください。"
+        @confirm="handleDocumentAdded"
+      />
     </div>
     <CustomTree :data="data" @selected="selectedHandler" />
   </div>
@@ -67,7 +79,7 @@
 import { computed, h, onMounted, reactive, ref, toRaw, watch } from 'vue';
 import CustomTree from '../components/CustomTree.vue';
 import NameDialog from '../components/NameDialog.vue';
-import { addDocumentDataById, addFolderDataById, createData } from '../data/createData';
+import { addDocumentDataById, addFolderDataById, createData, removeDataById } from '../data/createData';
 import { TreeOption } from 'naive-ui';
 
 const folderNameDialogVisible = ref(false);
@@ -93,7 +105,7 @@ const handleDocumentAdded = documentName => {
 };
 
 const deleteItem = () => {
-  alert('削除');
+  removeDataById(data, currentId.value);
 };
 
 const renameItem = () => {
