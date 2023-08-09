@@ -46,7 +46,7 @@
       </button>
       <button
         :disabled="renameDisabled"
-        @click="renameItem"
+        @click="renameDialogVisible = true"
         class="text-white px-2 my-2 rounded-full"
         :class="{
           'bg-purple-500': !renameDisabled,
@@ -70,6 +70,13 @@
         description="文書名を入力してください。"
         @confirm="handleDocumentAdded"
       />
+      <NameDialog
+        v-model="renameDialogVisible"
+        title="名前の変更"
+        placeholder="新しい名前"
+        description="新しい名前を入力してください。"
+        @confirm="handleRename"
+      />
     </div>
     <CustomTree :data="data" @selected="selectedHandler" />
   </div>
@@ -79,11 +86,12 @@
 import { computed, h, onMounted, reactive, ref, toRaw, watch } from 'vue';
 import CustomTree from '../components/CustomTree.vue';
 import NameDialog from '../components/NameDialog.vue';
-import { addDocumentDataById, addFolderDataById, createData, removeDataById } from '../data/createData';
+import { addDocumentDataById, addFolderDataById, createData, removeDataById, renameDataById } from '../data/createData';
 import { TreeOption } from 'naive-ui';
 
 const folderNameDialogVisible = ref(false);
 const documentNameDialogVisible = ref(false);
+const renameDialogVisible = ref(false);
 const currentId = ref('');
 const currentLabel = ref('');
 const isFolder = ref(false);
@@ -104,13 +112,14 @@ const handleDocumentAdded = documentName => {
   addDocumentDataById(data, currentId.value, documentName);
 };
 
+const handleRename =  newName => {
+  renameDataById(data, currentId.value, newName);
+};
+
 const deleteItem = () => {
   removeDataById(data, currentId.value);
 };
 
-const renameItem = () => {
-  alert('改名');
-};
 
 // [フォルダを追加]が使用不可
 const addFolderDisabled = computed(() => {

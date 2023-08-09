@@ -101,3 +101,18 @@ export const removeDataById = (tree: TreeOption[], id: string): void => {
     }
   }
 };
+
+export const renameDataById = (tree: TreeOption[], id: string, newName: string): void => {
+  for (let i = 0; i < tree.length; i++) {
+    const node = tree[i];
+    if (node.key === id) {
+      // IDが一致する場合、このノードの名前を変更
+      node.label = newName;
+      return;
+    }
+    if (node.children) {
+      // 子ノードがある場合、再帰的に探索
+      renameDataById(node.children, id, newName);
+    }
+  }
+};
