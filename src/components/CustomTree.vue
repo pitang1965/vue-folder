@@ -23,7 +23,9 @@ const osThemeRef = useOsTheme();
 const isDark = computed(() => (osThemeRef.value === 'dark'));
 const styleObject = computed(() => ({
   backgroundColor: isDark.value ? '#464646' : '#f2f2f2',
-  '--n-node-text-color': isDark.value ? '#fff' : '#555'
+  '--n-node-text-color': isDark.value ? '#fff' : '#555',
+  '--n-node-color-hover': isDark.value ? '#555' : '#e3e3e3',
+  '--n-node-color-active': '#FFE3DB'
 }));
 
 // 最初に展開するノード
