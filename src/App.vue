@@ -9,7 +9,7 @@
 import Navbar from '@/components/Navbar.vue'
 </script>
 
-<style>
+<style scoped>
 html {
   overflow-y: scroll;
 }

@@ -139,4 +139,4 @@ watch(data, async data => {
 });
 </script>
 
-<style></style>
+<style scoped></style>
