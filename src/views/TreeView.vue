@@ -8,75 +8,43 @@
     </div>
 
     <div class="flex gap-2">
-      <button
-        :disabled="addFolderDisabled"
-        @click="folderNameDialogVisible = true"
-        class="text-white px-2 my-2 rounded-full"
-        :class="{
+      <button :disabled="addFolderDisabled" @click="folderNameDialogVisible = true"
+        class="text-white px-2 my-2 rounded-full" :class="{
           'bg-purple-500': !addFolderDisabled,
           'bg-gray-300': addFolderDisabled,
           'hover:bg-purple-700': !addFolderDisabled
-        }"
-      >
+        }">
         フォルダを追加
       </button>
-      <button
-        :disabled="addDocumentDisabled"
-        @click="documentNameDialogVisible = true"
-        class="text-white px-2 my-2 rounded-full"
-        :class="{
+      <button :disabled="addDocumentDisabled" @click="documentNameDialogVisible = true"
+        class="text-white px-2 my-2 rounded-full" :class="{
           'bg-purple-500': !addDocumentDisabled,
           'bg-gray-300': addDocumentDisabled,
           'hover:bg-purple-700': !addDocumentDisabled
-        }"
-      >
+        }">
         文書を追加
       </button>
-      <button
-        :disabled="deleteDisabled"
-        @click="deleteItem"
-        class="text-white px-2 my-2 rounded-full"
-        :class="{
-          'bg-purple-500': !deleteDisabled,
-          'bg-gray-300': deleteDisabled,
-          'hover:bg-purple-700': !deleteDisabled
-        }"
-      >
+      <button :disabled="deleteDisabled" @click="deleteItem" class="text-white px-2 my-2 rounded-full" :class="{
+        'bg-purple-500': !deleteDisabled,
+        'bg-gray-300': deleteDisabled,
+        'hover:bg-purple-700': !deleteDisabled
+      }">
         削除
       </button>
-      <button
-        :disabled="renameDisabled"
-        @click="renameDialogVisible = true"
-        class="text-white px-2 my-2 rounded-full"
+      <button :disabled="renameDisabled" @click="renameDialogVisible = true" class="text-white px-2 my-2 rounded-full"
         :class="{
           'bg-purple-500': !renameDisabled,
           'bg-gray-300': renameDisabled,
           'hover:bg-purple-700': !renameDisabled
-        }"
-      >
+        }">
         改名
       </button>
-      <NameDialog
-        v-model="folderNameDialogVisible"
-        title="フォルダの追加"
-        placeholder="フォルダ名"
-        description="フォルダ名を入力してください。"
-        @confirm="handleFolderAdded"
-      />
-      <NameDialog
-        v-model="documentNameDialogVisible"
-        title="文書の追加"
-        placeholder="文書名"
-        description="文書名を入力してください。"
-        @confirm="handleDocumentAdded"
-      />
-      <NameDialog
-        v-model="renameDialogVisible"
-        title="名前の変更"
-        placeholder="新しい名前"
-        description="新しい名前を入力してください。"
-        @confirm="handleRename"
-      />
+      <NameDialog v-model="folderNameDialogVisible" title="フォルダの追加" placeholder="フォルダ名" description="フォルダ名を入力してください。"
+        @confirm="handleFolderAdded" />
+      <NameDialog v-model="documentNameDialogVisible" title="文書の追加" placeholder="文書名" description="文書名を入力してください。"
+        @confirm="handleDocumentAdded" />
+      <NameDialog v-model="renameDialogVisible" title="名前の変更" placeholder="新しい名前" description="新しい名前を入力してください。"
+        @confirm="handleRename" />
     </div>
     <CustomTree :data="data" @selected="selectedHandler" />
   </div>
@@ -86,7 +54,13 @@
 import { computed, h, onMounted, reactive, ref, toRaw, watch } from 'vue';
 import CustomTree from '../components/CustomTree.vue';
 import NameDialog from '../components/NameDialog.vue';
-import { addDocumentDataById, addFolderDataById, createData, removeDataById, renameDataById } from '../data/createData';
+import {
+  addDocumentDataById,
+  addFolderDataById,
+  createData,
+  removeDataById,
+  renameDataById
+} from '../data/createData';
 import { TreeOption } from 'naive-ui';
 
 const folderNameDialogVisible = ref(false);
@@ -112,14 +86,13 @@ const handleDocumentAdded = documentName => {
   addDocumentDataById(data, currentId.value, documentName);
 };
 
-const handleRename =  newName => {
+const handleRename = newName => {
   renameDataById(data, currentId.value, newName);
 };
 
 const deleteItem = () => {
   removeDataById(data, currentId.value);
 };
-
 
 // [フォルダを追加]が使用不可
 const addFolderDisabled = computed(() => {
