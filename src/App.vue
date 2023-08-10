@@ -10,10 +10,16 @@ import Navbar from '@/components/Navbar.vue'
 </script>
 
 <style>
+html {
+  overflow-y: scroll;
+}
+
 .app-container {
   background-color: #fff;
   color: #555;
   min-height: 100vh;
+  max-width: 100%;
+  min-width: 60%;
 }
 
 @media (prefers-color-scheme: dark) {
