@@ -25,7 +25,7 @@ const styleObject = computed(() => ({
   backgroundColor: isDark.value ? '#464646' : '#f2f2f2',
   '--n-node-text-color': isDark.value ? '#fff' : '#555',
   '--n-node-color-hover': isDark.value ? '#555' : '#e3e3e3',
-  '--n-node-color-active': '#FFE3DB'
+  '--n-node-color-active': isDark.value ? '#FF8F70' :'#FFE3DB'
 }));
 
 // 最初に展開するノード
