@@ -1,18 +1,12 @@
 <template>
-  <n-tree
-    block-line
-    :data="data"
-    :default-expanded-keys="expandedKeys"
-    :selectable="false"
-    :node-props="nodeProps"
-    :render-switcher-icon="renderSwitcherIconWithExpaned"
-    :on-update:expanded-keys="handleExpandedKeysUpdate"
-  />
+  <n-tree block-line :data="data" :default-expanded-keys="expandedKeys" :selectable="true" :node-props="nodeProps"
+    :render-switcher-icon="renderSwitcherIconWithExpaned" :on-update:expanded-keys="handleExpandedKeysUpdate"
+    :style="styleObject" class="tree" :class="{ 'is-dark': isDark }" />
 </template>
 
 <script setup lang="ts">
-import { h, onMounted, ref, watch } from 'vue';
-import { NIcon, TreeOption } from 'naive-ui';
+import { computed, h, onMounted, reactive, ref, watch } from 'vue';
+import { NIcon, useOsTheme, TreeOption } from 'naive-ui';
 import { FolderOpenOutline, FolderOutline } from '@vicons/ionicons5';
 
 const props = defineProps({
@@ -23,6 +17,14 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['selected']);
+
+// Naive UI関連（ツリーデータとダークモード対応）
+const osThemeRef = useOsTheme();
+const isDark = computed(() => (osThemeRef.value === 'dark'));
+const styleObject = computed(() => ({
+  backgroundColor: isDark.value ? '#464646' : '#f2f2f2',
+  '--n-node-text-color': isDark.value ? '#fff' : '#555'
+}));
 
 // 最初に展開するノード
 const expandedKeys = ref([]);
@@ -73,10 +75,18 @@ onMounted(() => {
   loadFromLocalStorage();
 });
 
-watch (expandedKeys, async(newKeys) => {
+watch(expandedKeys, async (newKeys) => {
   saveToLocalStorage();
 });
 
 </script>
 
-<style></style>
+<style>
+.tree svg path {
+  stroke: #555;
+}
+
+.tree.is-dark svg path {
+  stroke: #fff;
+}
+</style>
