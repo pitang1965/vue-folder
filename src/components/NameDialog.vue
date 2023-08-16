@@ -48,6 +48,7 @@ const visible = computed({
 const name = ref('');
 
 const closeDialog = () => {
+  name.value = '';
   visible.value = false;
 };
 
