@@ -4,8 +4,8 @@
     <el-input v-model="name" :placeholder="props.placeholder" :description="props.description" class="mt-2" />
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="closeDialog">Cancel</el-button>
-        <el-button @click="confirmDialog" type="primary"> Confirm </el-button>
+        <el-button @click="closeDialog">キャンセル</el-button>
+        <el-button @click="confirmDialog" type="primary"> 実行 </el-button>
       </span>
     </template>
   </el-dialog>
